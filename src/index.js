@@ -1,15 +1,14 @@
 import React, {Component} from 'react';  
-import {StyleSheet, Text, View,StatusBar} from 'react-native';  
+import {StyleSheet, Text, View,StatusBar, Image, SafeAreaView, ScrollView} from 'react-native';  
 import {createAppContainer} from 'react-navigation';   
-import Icon from 'react-native-vector-icons/FontAwesome';  
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import AppNavigator from './lib/router';  
-import {Fragment} from 'react'; 
+import AppNavigator from './lib/router';
+
 const AppIndex = createAppContainer(AppNavigator)  
   
 export default class App extends Component{  
 
-    //export default class App extends Component {
         constructor(props) {
           super(props);
           this.state = {
@@ -26,26 +25,18 @@ export default class App extends Component{
       
     render(){  
         const state = this.state;
-        return(  
-            <Fragment>
-            <View style={{flex:1}} >  
-                <StatusBar  
-                    backgroundColor='black'  
-                    barStyle='light-content'  
-                />  
-                <View style={styles.header}>  
-                    <Icon name='ios-camera' size={28} color='white'/>  
-                    <Icon name='ios-menu' size={28} color='white'/>  
-                </View>  
-                <AppIndex/>  
-            </View>  
-            <View style={styles.container}>
-            <Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
-              <Row data={state.HeadTable} style={styles.HeadStyle} textStyle={styles.TableText}/>
-              <Rows data={state.DataTable} textStyle={styles.TableText}/>
-            </Table>
-          </View>
-          </Fragment>
+        return(
+            <SafeAreaView style={styles.container}>
+              <ScrollView style={styles.scrollView}>
+                <AppIndex/> 
+                <Image source={require('./images/image1.jpg')} style={{ width:100, height:100, marginBottom:10 }}/>
+              <Table borderStyle={{borderWidth: 1, borderColor: '#ffa1d2'}}>
+                <Row data={state.HeadTable} style={styles.HeadStyle} textStyle={styles.TableText}/>
+                <Rows data={state.DataTable} textStyle={styles.TableText}/>
+              </Table>
+              <Text>This is a text shown in your app.</Text>
+            </ScrollView>
+          </SafeAreaView>
         )  
     }  
 }  
@@ -61,12 +52,15 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,  
         paddingTop: 5,  
     },  
-    container: { 
-        flex: 1,
-        padding: 18,
-        paddingTop: 40,
-        backgroundColor: '#ffffff' 
-      },
+    container: {
+      flex: 1,
+      marginTop: 20,
+    },
+    scrollView: {
+      backgroundColor: 'pink',
+      marginHorizontal: 20,
+      flex: 1
+    },
       HeadStyle: { 
         height: 50,
         alignContent: "center",
